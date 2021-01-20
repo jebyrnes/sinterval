@@ -1,0 +1,14 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^CODE_OF_CONDUCT\.md$
+^predictSims\.Rproj$
+^README\.Rmd$
+^cran-comments\.md$
+^\.github$
+hex
+testex
+setup.R
+man-roxygen
+.DS_Store
+tests_old
