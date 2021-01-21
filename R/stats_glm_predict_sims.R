@@ -101,7 +101,19 @@ add_predicted_sims.glm <- function(newdata,
 
 
   #make a model matrix with the data
-  X <- stats::model.matrix(mod, newdata, na.action = NULL)
+  is_resp <- is.null(newdata[[resp]])
+  if(is_resp){
+    resp <- as.character(formula(mod))[[2]]
+    newdata[[resp]] <- NA
+  }
+
+  X <- stats::model.matrix(mod,
+                           data = newdata,
+                           na.action = NULL)
+
+  if(is_resp){
+    newdata <- newdata[ -ncol(newdata)] #it was added as the last col
+  }
 
   #get the coefficients
   coef_sims <- arm::sim(mod, n.sims = n_sims)
