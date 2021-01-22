@@ -2,8 +2,10 @@
 
 S3method(add_fitted_sims,glm)
 S3method(add_fitted_sims,lm)
+S3method(add_fitted_sims,psem)
 S3method(add_predicted_sims,glm)
 S3method(add_predicted_sims,lm)
+S3method(add_predicted_sims,psem)
 export("%>%")
 export(add_fitted_sims)
 export(add_predicted_sims)

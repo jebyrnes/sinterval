@@ -14,7 +14,8 @@ Description: This package takes fit lm, glm, or lme4 objects along
 License: MIT + file LICENSE
 Suggests: 
     testthat,
-    ggdist
+    ggdist,
+    piecewiseSEM
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
