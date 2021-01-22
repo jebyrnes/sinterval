@@ -101,7 +101,7 @@ add_predicted_sims.glm <- function(newdata,
 
 
   #make a model matrix with the data
-  resp <- as.character(formula(mod))[[2]]
+  resp <- as.character(stats::formula(mod))[[2]]
 
   is_resp <- is.null(newdata[[resp]])
 

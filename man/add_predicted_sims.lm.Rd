@@ -47,7 +47,7 @@ clotting <- data.frame(
 
 mod <- lm(lot1 ~ log(u) + lot2, data = clotting)
 
-sims_pred <- add_fitted_sims(clotting, mod)
+sims_pred <- add_predicted_sims(clotting, mod)
 
 head(sims_pred)
 
