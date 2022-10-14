@@ -10,20 +10,25 @@ Authors@R:
 Description: This package takes fit lm, glm, or lme4 objects along 
     with a new data frame and returns values from simulations incorporating
     either coefficient error (fit) or full prediction error. It is directly 
-    inspired by the arm and tidybayes packages.
+    inspired by the arm and tidybayes/ggdist packages.
 License: MIT + file LICENSE
 Suggests: 
     testthat,
     ggdist,
-    piecewiseSEM
+    piecewiseSEM,
+    knitr,
+    rmarkdown
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
 Imports: 
     arm,
     tidyr,
     magrittr,
     SuppDists,
     MASS,
-    generics
+    palmerpenguins,
+    ggdist,
+    ggplot2
+RoxygenNote: 7.2.1
+VignetteBuilder: knitr
