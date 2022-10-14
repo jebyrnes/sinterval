@@ -1,0 +1,90 @@
+---
+title: "Introduction to sinterval"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to sinterval}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 6
+)
+```
+
+# 1. Intro
+The `sinterval` package seeks to emulate the behavior of [tidybayes](https://mjskay.github.io/tidybayes/) and the possibilities of [arm](	https://CRAN.R-project.org/package=arm). for non-Bayesian models, giving easy access to simulations from fit models in a tidy format. These simulations can then be used for plotting, via packages like [ggdist](https://mjskay.github.io/ggdist/), power analysis, or otherwise.
+
+Let's take a look at the two core function, `add_fitted_sims()` and `add_predicted_sims()` using the [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/) dataset.
+
+Note, these functions are written to be generics, and as such, they can be written for any class of models and added to this package. To do so, please fork [the package Github repo](https://github.com/jebyrnes/sinterval/) and [file an issue](https://github.com/jebyrnes/sinterval/issues). I will take a look, and if approved, you can issue a pull request.
+
+```{r setup}
+library(sinterval)
+library(palmerpenguins)
+library(ggplot2)
+library(ggdist)
+```
+
+# 2. add_fitted_sims()
+
+This function gets fitted simulations from a model incorporating error in fit. It then merges that with a dataset and its set of predictors some number of times (the number of simulations). Let's look at a model where flipper length is predicted by body mass and species. 
+
+```{r}
+penguins_filter <- penguins[,c("flipper_length_mm", "body_mass_g", "species")]
+penguins_filter <- penguins_filter[!is.na(penguins_filter$body_mass_g),]
+
+mod <- lm(flipper_length_mm ~ body_mass_g*species,
+          data = penguins_filter)
+
+fit_sims <- add_fitted_sims(penguins_filter, mod, n_sims = 100)
+```
+
+By default, `add_fitted_sims` does 1000 simulations, but here we use 100. One can also set a seed for repeatable behavior. Looking at the data we can see a column with the simulation number and another with a fit value.
+
+```{r}
+fit_sims
+```
+
+We can then use this to visualize the model fit with simulation!
+
+```{r}
+ggplot(fit_sims,
+       aes(x = body_mass_g, 
+           y = flipper_length_mm_fit, 
+          color = species)) +
+  geom_line(mapping = aes(group = paste(species, .sim)),
+            alpha = 0.1) +
+  geom_point(data = penguins_filter, aes(y = flipper_length_mm)) +
+  theme_classic() +
+  labs(title = "Fit Simulations")
+```
+
+# 3. add_predicted_sims()
+
+This function takes into account the additional prediction error in the model. When possible, it attempts to also draw on error in the estimation of the error generating process, as seen in [arm](https://CRAN.R-project.org/package=arm) if at all possible. We can, for example, use this along with `ggdist` to visualize prediction error.
+
+```{r}
+predicted_sims <- add_predicted_sims(penguins_filter, mod, n_sims = 100)
+
+library(ggdist)
+
+ggplot(predicted_sims,
+       aes(x = body_mass_g, 
+           y = flipper_length_mm_predict, 
+          color = species, fill = species)) +
+  geom_point(data = penguins_filter, aes(y = flipper_length_mm)) +
+  stat_lineribbon(alpha = 1/4) +
+  theme_classic() +
+  labs(title = "Prediction Intervals")
+```
+
+Note that the column name is also changed to reflect that this is a prediction.
+
+```{r}
+predicted_sims
+```
