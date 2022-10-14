@@ -9,7 +9,7 @@
 \arguments{
 \item{newdata}{a data.frame of new data to predict}
 
-\item{mod}{An lm model to simulate from.}
+\item{mod}{A \link{lm} model to simulate from.}
 
 \item{n_sims}{number of simulation samples to construct}
 

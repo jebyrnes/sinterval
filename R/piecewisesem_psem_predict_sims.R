@@ -90,6 +90,9 @@ add_predicted_sims.psem <- function (newdata,
   #need to find a better way to do this, memory-wise
   resp <- rep(NA, length(mod_sorted))
 
+  #add an identifier for keeping track of data points
+  newdata$start_row_num <- 1:nrow(newdata)
+
   for(i in 1:length(mod_sorted)){
     #get the response
     resp[i] <- as.character(stats::formula(mod_sorted[[i]]))[[2]]
@@ -98,7 +101,7 @@ add_predicted_sims.psem <- function (newdata,
                                n_sims, seed, type, ...)
   }
 
-  #fix colmn names - add predicted or fitted back to
+  #fix column names - add predicted or fitted back to
   #those variables, and lop _old off of variables from initial data
   #frame
   names(newdata)[names(newdata) %in% resp] <-
@@ -108,6 +111,9 @@ add_predicted_sims.psem <- function (newdata,
     if(sum(is_old)>0){
     names(newdata) <- gsub("_old$", "", names(newdata))
   }
+
+  #cleanup
+  newdata[,-(names(newdata)=="start_row_num")]
 
   #data out!
   newdata

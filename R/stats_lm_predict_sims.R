@@ -2,7 +2,7 @@
 #' @templateVar typeof fitted
 #' @template title_desc_sinterval
 #'
-#' @param mod An lm model to simulate from.
+#' @param mod A [lm] model to simulate from.
 #' @template params_sinterval
 #' @template params_unused_dots
 #' @return A [tibble::tibble()] with information about simulate values.
