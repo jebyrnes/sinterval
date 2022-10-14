@@ -17,7 +17,10 @@ Suggests:
     ggdist,
     piecewiseSEM,
     knitr,
-    rmarkdown
+    rmarkdown,
+    palmerpenguins,
+    ggplot2,
+    generics
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -26,9 +29,6 @@ Imports:
     tidyr,
     magrittr,
     SuppDists,
-    MASS,
-    palmerpenguins,
-    ggdist,
-    ggplot2
+    MASS
 RoxygenNote: 7.2.1
 VignetteBuilder: knitr

@@ -12,3 +12,4 @@ setup.R
 man-roxygen
 .DS_Store
 tests_old
+docs
