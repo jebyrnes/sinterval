@@ -1,5 +1,5 @@
 Package: sinterval
-Title: Generate simulated values from models with different intervals of uncertainty
+Title: Generate Simulated Values from Models with Different Intervals of Uncertainty
 Version: 0.1.1
 Authors@R: 
     person(given = "Jarrett",
