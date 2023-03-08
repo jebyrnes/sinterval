@@ -30,5 +30,4 @@ Imports:
     magrittr,
     SuppDists,
     MASS
-RoxygenNote: 7.2.1
 VignetteBuilder: knitr
