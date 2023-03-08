@@ -7,10 +7,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jarrett.byrnes@umb.edu",
            comment = c(ORCID = "0000-0002-9791-9472"))
-Description: This package takes fit lm, glm, or lme4 objects along 
+Description: This package takes fit model objects along 
     with a new data frame and returns values from simulations incorporating
     either coefficient error (fit) or full prediction error. It is directly 
-    inspired by the arm and tidybayes/ggdist packages.
+    inspired by the 'arm' and 'tidybayes' and 'ggdist' packages.
 License: MIT + file LICENSE
 Suggests: 
     testthat,
